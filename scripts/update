@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+yarn up @eslint/js
+yarn up eslint
+yarn up prettier
+yarn up prisma
+yarn up typescript
+yarn up typescript-eslint
+yarn up detritus-client

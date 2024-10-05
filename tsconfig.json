@@ -1,0 +1,40 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "rootDir": "src",
+        "outDir": "dist",
+        "baseUrl": "src",
+        "strict": true,
+        "alwaysStrict": true,
+        "strictFunctionTypes": true,
+        "strictNullChecks": true,
+        "strictPropertyInitialization": true,
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": false,
+        "noImplicitThis": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "downlevelIteration": true,
+        "paths": {
+            "@luna/client/*": ["packages/client/*"],
+            "@luna/commands/*": ["packages/commands/*"],
+            "@luna/errors/*": ["packages/errors/*"],
+            "@luna/events/*": ["packages/events/*"],
+            "@luna/i18n/*": ["packages/i18n/*"],
+            "@luna/interactions/*": ["packages/commands/interactions/*"],
+            "@luna/modules/*": ["packages/modules/*"],
+            "@luna/util/*": ["packages/util/*"],
+            "@luna/db/*": ["packages/database/*"]
+        },
+        "pretty": true
+    }
+}
