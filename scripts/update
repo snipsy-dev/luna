@@ -5,4 +5,4 @@ yarn up prettier
 yarn up prisma
 yarn up typescript
 yarn up typescript-eslint
-yarn up detritus-client
+# yarn up detritus-client

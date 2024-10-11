@@ -1,4 +1,5 @@
 declare module '@luna/typings' {
+    import { Interaction } from 'detritus-client';
     /**
      * representatives the custom environment properties.
      *
@@ -21,5 +22,25 @@ declare module '@luna/typings' {
          *
          */
         SUPPORT_SERVER: string;
+    }
+
+    export namespace LunaEvents {
+        export interface ListenerHandlerOptions {
+            directory: string;
+        }
+    }
+
+    export namespace Commands {
+        export interface CustomCommandOptions
+            extends Interaction.InteractionCommandOptions {
+            id: string;
+            nsfw?: boolean;
+            metadata: CommandMetaData;
+        }
+
+        export interface CommandMetaData {
+            id: string;
+            nsfw?: boolean;
+        }
     }
 }
