@@ -16,10 +16,11 @@ import {
 })
 export default class PingCommand extends CustomInteractionCommand {
     async exec(ctx: Context<Record<string, unknown>>): Promise<unknown> {
-        return ctx.reply({
+        await ctx.reply({
             content: 'pong.',
             flags: 1 << 12,
         });
+
         return;
     }
 }

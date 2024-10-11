@@ -4,11 +4,10 @@ import {
     Constants,
 } from 'detritus-client';
 import { getEnv } from '@luna/util/env.js';
-import { LunaClient } from 'packages/LunaClient';
+import { LunaClient } from '@luna/clients/LunaClient';
 const client = new LunaClient(getEnv().DISCORD_TOKEN, {
     gateway: {
         autoReconnect: true,
-        disabledEvents: [],
         intents: [
             Constants.GatewayIntents.GUILDS,
             Constants.GatewayIntents.GUILD_MEMBERS,
@@ -75,10 +74,14 @@ commandClient.add({
     },
 });
 async function run() {
+    client.listenerHandler.addDefaultListeners();
+    await client.listenerHandler.loadAll();
     await client.run({ wait: true });
     await commandClient.run({ wait: true });
     await interactionClient.run({ wait: true });
-    await interactionClient.uploadApplicationCommands();
+    if (interactionClient.commands.length !== 1) {
+        await interactionClient.uploadApplicationCommands();
+    }
 }
 
 run();

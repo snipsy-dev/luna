@@ -28,6 +28,11 @@ declare module '@luna/typings' {
         export interface ListenerHandlerOptions {
             directory: string;
         }
+        export interface EventListenerOption {
+            emitter: string;
+            event: string;
+            type: 'on' | 'once';
+        }
     }
 
     export namespace Commands {
