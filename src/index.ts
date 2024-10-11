@@ -1,53 +1,51 @@
-import * as detritus from 'detritus-client';
-import { getEnv } from '@luna/util/env.js';
-import { log } from 'console';
 import {
-    ActivityTypes,
-    GatewayIntents,
-    MessageFlags,
-    PresenceStatuses,
-} from 'detritus-client/lib/constants.js';
-const client = new detritus.ShardClient(getEnv().DISCORD_TOKEN, {
+    CommandClient,
+    InteractionCommandClient,
+    Constants,
+} from 'detritus-client';
+import { getEnv } from '@luna/util/env.js';
+import { LunaClient } from 'packages/LunaClient';
+const client = new LunaClient(getEnv().DISCORD_TOKEN, {
     gateway: {
         autoReconnect: true,
         disabledEvents: [],
         intents: [
-            GatewayIntents.GUILDS,
-            GatewayIntents.GUILD_MEMBERS,
-            GatewayIntents.GUILD_BANS,
-            GatewayIntents.GUILD_EMOJIS,
-            GatewayIntents.GUILD_INTEGRATIONS,
-            GatewayIntents.GUILD_WEBHOOKS,
-            GatewayIntents.GUILD_INVITES,
-            GatewayIntents.GUILD_VOICE_STATES,
-            GatewayIntents.GUILD_PRESENCES,
-            GatewayIntents.GUILD_MESSAGES,
-            GatewayIntents.GUILD_MESSAGE_REACTIONS,
-            GatewayIntents.GUILD_MESSAGE_TYPING,
-            GatewayIntents.DIRECT_MESSAGES,
-            GatewayIntents.DIRECT_MESSAGE_REACTIONS,
-            GatewayIntents.DIRECT_MESSAGE_TYPING,
-            GatewayIntents.MESSAGE_CONTENT,
-            GatewayIntents.GUILD_SCHEDULED_EVENTS,
-            GatewayIntents.AUTO_MODERATION_CONFIGURATION,
-            GatewayIntents.AUTO_MODERATION_EXECUTION,
-            GatewayIntents.GUILD_MESSAGE_POLLS,
-            GatewayIntents.DIRECT_MESSAGE_POLLS,
+            Constants.GatewayIntents.GUILDS,
+            Constants.GatewayIntents.GUILD_MEMBERS,
+            Constants.GatewayIntents.GUILD_BANS,
+            Constants.GatewayIntents.GUILD_EMOJIS,
+            Constants.GatewayIntents.GUILD_INTEGRATIONS,
+            Constants.GatewayIntents.GUILD_WEBHOOKS,
+            Constants.GatewayIntents.GUILD_INVITES,
+            Constants.GatewayIntents.GUILD_VOICE_STATES,
+            Constants.GatewayIntents.GUILD_PRESENCES,
+            Constants.GatewayIntents.GUILD_MESSAGES,
+            Constants.GatewayIntents.GUILD_MESSAGE_REACTIONS,
+            Constants.GatewayIntents.GUILD_MESSAGE_TYPING,
+            Constants.GatewayIntents.DIRECT_MESSAGES,
+            Constants.GatewayIntents.DIRECT_MESSAGE_REACTIONS,
+            Constants.GatewayIntents.DIRECT_MESSAGE_TYPING,
+            Constants.GatewayIntents.MESSAGE_CONTENT,
+            Constants.GatewayIntents.GUILD_SCHEDULED_EVENTS,
+            Constants.GatewayIntents.AUTO_MODERATION_CONFIGURATION,
+            Constants.GatewayIntents.AUTO_MODERATION_EXECUTION,
+            Constants.GatewayIntents.GUILD_MESSAGE_POLLS,
+            Constants.GatewayIntents.DIRECT_MESSAGE_POLLS,
         ],
 
         presence: {
-            status: PresenceStatuses.IDLE,
+            status: Constants.PresenceStatuses.IDLE,
             activities: [
                 {
                     name: 'you',
-                    type: ActivityTypes.LISTENING,
+                    type: Constants.ActivityTypes.LISTENING,
                 },
             ],
         },
     },
 });
-await client.run({ wait: true });
-const commandClient = new detritus.CommandClient(client, {
+
+const commandClient = new CommandClient(client, {
     onCommandCheck(ctx) {
         if (!ctx.user.bot) {
             return true;
@@ -63,21 +61,11 @@ const commandClient = new detritus.CommandClient(client, {
     },
 });
 
-const interactionClient = new detritus.InteractionCommandClient(client, {
+const interactionClient = new InteractionCommandClient(client, {
     checkCommands: true,
 });
 
-interactionClient.add({
-    name: 'ping',
-    description: 'ping command',
-    run: (ctx) => {
-        log('ping');
-        return ctx.editOrRespond({
-            content: 'pong',
-            flags: MessageFlags.EPHEMERAL,
-        });
-    },
-});
+interactionClient.addMultipleIn('./commands/');
 commandClient.add({
     name: 'ping',
     run: (ctx) => {
@@ -86,6 +74,11 @@ commandClient.add({
         });
     },
 });
-await commandClient.run({ wait: true });
-await interactionClient.run({ wait: true });
-await interactionClient.uploadApplicationCommands();
+async function run() {
+    await client.run({ wait: true });
+    await commandClient.run({ wait: true });
+    await interactionClient.run({ wait: true });
+    await interactionClient.uploadApplicationCommands();
+}
+
+run();

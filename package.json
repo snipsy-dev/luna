@@ -3,7 +3,6 @@
     "packageManager": "yarn@4.5.0",
     "main": "dist/bot/index.js",
     "description": "a dnd focused discord bot",
-    "type": "module",
     "version": "1.0.0@canary",
     "author": {
         "name": "snipsyfox",
@@ -29,12 +28,12 @@
         "prisma": "^5.20.0"
     },
     "devDependencies": {
-        "@eslint/js": "^9.11.1",
+        "@eslint/js": "^9.12.0",
         "@types/node": "^22.7.4",
-        "eslint": "^9.11.1",
+        "eslint": "^9.12.0",
         "prettier": "^3.3.3",
         "prisma": "^5.20.0",
         "typescript": "^5.6.2",
-        "typescript-eslint": "^8.8.0"
+        "typescript-eslint": "^8.8.1"
     }
 }
