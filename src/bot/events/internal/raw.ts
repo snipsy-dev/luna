@@ -5,10 +5,11 @@ import { GatewayClientEvents } from 'detritus-client';
     id: 'client:raw',
     emitter: 'client',
     event: 'raw',
+    disabled: true,
     type: 'on',
 })
 export default class RawEventListener extends CustomEventListener {
     run(data: GatewayClientEvents.Raw) {
-        data;
+        if (data) return;
     }
 }

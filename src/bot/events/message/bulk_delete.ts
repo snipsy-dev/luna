@@ -10,6 +10,8 @@ import { ClientEvents } from 'detritus-client/lib/constants';
 })
 export default class MessageBulkDeleteEvent extends CustomEventListener {
     run(data: GatewayClientEvents.MessageDeleteBulk) {
-        data;
+        if (process.env.DEBUG === 'true') {
+            console.log(`someone bulk deleted messages in ${data.channelId}`);
+        }
     }
 }

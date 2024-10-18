@@ -10,6 +10,6 @@ import { ClientEvents } from 'detritus-client/lib/constants';
 })
 export default class MessageCreateEvent extends CustomEventListener {
     run(data: GatewayClientEvents.MessageUpdate) {
-        data;
+        if (data.message?.author.bot) return;
     }
 }

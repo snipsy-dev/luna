@@ -85,10 +85,6 @@ const client = new LunaShardClient(getEnv().DISCORD_TOKEN, {
 });
 async function start() {
     await client.handlers.events.loadAll();
-    client.on('raw', (raw) => {
-        console.log('#raw');
-        raw;
-    });
     await client.run({ wait: true });
 }
 setTimeout(() => start(), 3000);

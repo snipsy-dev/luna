@@ -26,12 +26,13 @@ export abstract class CustomEventListener
             typeof options.disabled !== 'undefined' ? options.disabled : false;
     }
 
-    abstract run(...args: any[]): any;
+    abstract run(...args: unknown[]): unknown;
 
     static applyOptions(options: CustomEventListenerOptions) {
+        //eslint-disable-next-line
         return (cls: any): any => {
             class T extends cls {
-                constructor(...opts: any) {
+                constructor(opts: CustomEventListenerOptions) {
                     super({
                         ...opts,
                         ...options,

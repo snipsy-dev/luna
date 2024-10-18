@@ -10,6 +10,10 @@ import { ClientEvents } from 'detritus-client/lib/constants';
 })
 export default class ClusterClientReadyEvent extends CustomEventListener {
     run(data: GatewayClientEvents.GatewayReady) {
-        data;
+        console.log('client is ready.');
+        console.log([
+            `SessionId: ${data.raw.session_id}`,
+            `Bot id: ${data.raw.user.id}`,
+        ]);
     }
 }

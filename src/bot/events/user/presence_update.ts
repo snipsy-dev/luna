@@ -10,6 +10,6 @@ import { ClientEvents } from 'detritus-client/lib/constants';
 })
 export default class UserPresenceUpdateEvent extends CustomEventListener {
     run(data: GatewayClientEvents.PresenceUpdate) {
-        data;
+        if (data.member?.bot) return;
     }
 }
