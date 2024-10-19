@@ -21,6 +21,15 @@ model GuildSettings {
   @@index([guildId])
 }
 
+model Sessions {
+  MongoId   String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionId String
+  clientId  String
+  createdAt DateTime @default(now())
+
+  @@index([sessionId, clientId])
+}
+
 model UserSettings {
   MongoId String @id @default(auto()) @map("_id") @db.ObjectId
   userId  String

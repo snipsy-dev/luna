@@ -1,5 +1,6 @@
 import { LunaShardClient } from '@luna/clients/ShardClient';
 import { ListenerHandler } from './EventListenerHandler';
+import { ALL_EVENTS } from '@luna/util/Constants';
 interface CustomEventListenerOptions {
     id: string;
     disabled?: boolean;
@@ -28,6 +29,12 @@ export abstract class CustomEventListener
 
     abstract run(...args: unknown[]): unknown;
 
+    toString() {
+        return `Listener<${this.id}>`;
+    }
+
+    static events = ALL_EVENTS;
+
     static applyOptions(options: CustomEventListenerOptions) {
         //eslint-disable-next-line
         return (cls: any): any => {
@@ -41,9 +48,5 @@ export abstract class CustomEventListener
             }
             return T;
         };
-    }
-
-    toString() {
-        return `Listener<${this.id}>`;
     }
 }

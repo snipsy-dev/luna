@@ -1,6 +1,7 @@
 import { GuildSettings } from '@prisma/client';
 import { Structures } from 'detritus-client';
-import { Database } from 'packages/db/db';
+import { Database } from '@luna/db/db';
+import { createError } from '@luna/util/Util';
 
 export class GuildSettingsModel {
     constructor(protected database: Database) {}
@@ -9,7 +10,7 @@ export class GuildSettingsModel {
         return this.raw.create({
             data: {
                 guildId: guild.id,
-                prefix: ['.'],
+                prefix: '.',
             },
         });
     }
@@ -48,7 +49,7 @@ export class GuildSettingsModel {
             .findFirst({ where: { guildId: guild.id } })
             .then((data) => !!data)
             .catch((err) => {
-                console.error(err);
+                this.db.client.emit('error', createError(err, { by: 'OTHER' }));
                 return false;
             });
     }

@@ -1,15 +1,15 @@
 import { CustomEventListener } from '@luna/events/EventListener';
-import { GatewayClientEvents } from 'detritus-client';
+import { ALL_EVENTS, EventData } from '@luna/util/Constants';
 
 @CustomEventListener.applyOptions({
-    id: 'client:internal:raw',
+    id: 'client:internal:error',
     emitter: 'client',
-    event: 'raw',
+    event: ALL_EVENTS.ERROR,
     disabled: true,
     type: 'on',
 })
 export default class RawEventListener extends CustomEventListener {
-    run(data: GatewayClientEvents.Raw) {
+    run(data: EventData['Error']) {
         if (data) return;
     }
 }

@@ -1,6 +1,7 @@
 import { UserSettings } from '@prisma/client';
 import { Structures } from 'detritus-client';
-import { Database } from 'packages/db/db';
+import { Database } from '@luna/db/db';
+import { createError } from '@luna/util/Util';
 
 export class UserSettingsModel {
     constructor(protected database: Database) {}
@@ -47,7 +48,7 @@ export class UserSettingsModel {
             .findFirst({ where: { userId: user.id } })
             .then((data) => !!data)
             .catch((err) => {
-                console.error(err);
+                this.db.client.emit('error', createError(err, { by: 'OTHER' }));
                 return false;
             });
     }

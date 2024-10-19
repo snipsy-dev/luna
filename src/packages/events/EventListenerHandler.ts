@@ -27,7 +27,6 @@ export class ListenerHandler extends EventEmitter {
 
     async loadAll() {
         const files = await this.readdirRecursive(this.options.directory);
-
         for (const file of files) {
             const data = await import(file);
 
@@ -53,9 +52,10 @@ export class ListenerHandler extends EventEmitter {
                     }
                     continue;
                 }
-
+                e.client = this.client;
+                e.listenerHandler = this;
                 this.modules.set(e.id, e);
-                console.log(this.modules.size);
+
                 this.emit('load', e);
                 this.emitters[e.emitter as 'client'][e.type || 'on'](
                     e.event,
