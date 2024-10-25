@@ -18,10 +18,11 @@
     ],
     "scripts": {
         "build": "tsc",
+        "dev": "yarn build && yarn path && yarn start",
         "lint": "prettier --write . && eslint",
-        "start": "node dist/bot/index.js",
         "path": "node scripts/module-paths.mjs",
-        "dev": "yarn build && yarn path && yarn start"
+        "pre-commit": "./venv/bin/pre-commit run --all-files",
+        "start": "node dist/bot/index.js"
     },
     "dependencies": {
         "@prisma/client": "5.21.1",

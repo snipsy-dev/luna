@@ -1,4 +1,4 @@
-import { ClientEvents } from 'detritus-client/lib/constants';
+import { ClientEvents } from 'detritus-client/lib/constants.js';
 export const ALL_EVENTS = {
     ...ClientEvents,
     ERROR: 'error',
@@ -13,3 +13,7 @@ export interface EventData {
         };
     };
 }
+
+export const REGEXES = {
+    PROXY: /(\w+):\s*([^:]+?)(?=\w+:|$)/g,
+};

@@ -1,6 +1,6 @@
 import { LunaShardClient } from '@luna/clients/ShardClient';
 import { CustomEnv } from '@luna/typings';
-import { GatewayIntents } from 'detritus-client/lib/constants';
+import { ClientEvents, GatewayIntents } from 'detritus-client/lib/constants';
 import fs from 'fs';
 
 const env = {} as CustomEnv;
@@ -85,6 +85,17 @@ const client = new LunaShardClient(getEnv().DISCORD_TOKEN, {
 });
 async function start() {
     await client.handlers.events.loadAll();
+    console.log(
+        'REPLACE ',
+        client.hasEventListener(ClientEvents.PRESENCES_REPLACE),
+    );
+    console.log(
+        'UPDATE ',
+        client.hasEventListener(ClientEvents.PRESENCE_UPDATE),
+    );
+    client.on('presencesReplace', (p) => {
+        console.log('aaa', p.presences);
+    });
     await client.run({ wait: true });
 }
 setTimeout(() => start(), 3000);

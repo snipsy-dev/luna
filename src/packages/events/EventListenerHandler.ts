@@ -23,6 +23,10 @@ export class ListenerHandler extends EventEmitter {
         this.emitters = {
             client: this.client,
         };
+
+        this.on('load', (e: CustomEventListener) => {
+            console.log(`loaded ${e.id}`);
+        });
     }
 
     async loadAll() {
