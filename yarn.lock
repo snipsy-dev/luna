@@ -254,8 +254,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.7.4":
-  version: 22.7.7
+
+"@types/node@npm:^22.7.7":
+  version: 2
   resolution: "@types/node@npm:22.7.7"
   dependencies:
     undici-types: "npm:~6.19.2"
@@ -1289,7 +1290,7 @@ __metadata:
   dependencies:
     "@eslint/js": "npm:^9.12.0"
     "@prisma/client": "npm:5.21.1"
-    "@types/node": "npm:^22.7.4"
+    "@types/node": "npm:^22.7.7"
     detritus-client: "npm:0.17.0-beta.40"
     eslint: "npm:^9.12.0"
     prettier: "npm:^3.3.3"
