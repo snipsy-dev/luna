@@ -25,15 +25,16 @@
         "experimentalDecorators": true,
         "downlevelIteration": true,
         "paths": {
-            "@luna/client/*": ["packages/client/*"],
             "@luna/commands/*": ["packages/commands/*"],
             "@luna/errors/*": ["packages/errors/*"],
             "@luna/events/*": ["packages/events/*"],
             "@luna/i18n/*": ["packages/i18n/*"],
             "@luna/interactions/*": ["packages/commands/interactions/*"],
+            "@luna/interaction-commands/*": ["packages/interaction-commands/*"],
             "@luna/modules/*": ["packages/modules/*"],
             "@luna/util/*": ["packages/util/*"],
-            "@luna/db/*": ["packages/database/*"]
+            "@luna/db/*": ["packages/db/*"],
+            "@luna/clients/*": ["packages/clients/*"]
         },
         "pretty": true
     }
